@@ -1,0 +1,53 @@
+name: DEV-CICD
+
+on: 
+  push:
+    branches:
+      - qa
+
+env:
+  TARGETARCH: amd64
+  TARGETENV: qa
+
+jobs:
+  ci:
+    name: DEV-CICD
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Run test
+      run: make test
+    - name: Docker Hub Login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Build_Push
+      env:
+        APP: "kbot"
+        REGISTRY: "devdp"
+      run: make image push TARGETARCH=$TARGETARCH-$TARGETENV
+    - name: Clean
+      run: make clean TARGETARCH=$TARGETARCH-$TARGETENV
+
+    - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+    - uses: GuillaumeFalourd/git-commit-push@v1.3
+      with:
+        email: github-actions@github.com
+        name: github-actions
+        commit_message: "Update version $VERSION"
+        # remote_repository: https://github.com/dm-ol/gke-flux
+        target_branch: stage
+        files: .
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
