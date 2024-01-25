@@ -33,7 +33,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build_Push
       env:
-        APP: "kbot"
+        APP: "cicd-test"
         REGISTRY: "devdp"
       run: make image push TARGETARCH=$TARGETARCH
     - name: Clean
