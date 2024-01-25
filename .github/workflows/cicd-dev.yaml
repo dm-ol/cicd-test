@@ -35,9 +35,9 @@ jobs:
       env:
         APP: "kbot"
         REGISTRY: "devdp"
-      run: make image push TARGETARCH=$TARGETARCH-$TARGETENV
+      run: make image push TARGETARCH=$TARGETARCH
     - name: Clean
-      run: make clean TARGETARCH=$TARGETARCH-$TARGETENV
+      run: make clean TARGETARCH=$TARGETARCH
 
     - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
