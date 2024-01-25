@@ -46,7 +46,6 @@ jobs:
         email: github-actions@github.com
         name: github-actions
         commit_message: "Update version $VERSION"
-        # remote_repository: https://github.com/dm-ol/gke-flux
         target_branch: qa
         files: .
         access_token: ${{ secrets.GITHUB_TOKEN }}
