@@ -1,0 +1,23 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+image:
+  repository: devdp
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.6-f1700a5"
+  os: linux
+  arch: amd64
+secret:
+  name: "kbot"
+  env: "TELE_TOKEN"
+  key: "token"
+securityContext:
+  privileged: true
+metrics_host:
+  name: "METRICS_HOST"
+  value: "opentelemetry-collector.monitoring.svc.cluster.local:4317"
+podAnnotations:
+  sidecar.opentelemetry.io/inject: "monitoring/opentelemetry-sidecar"
