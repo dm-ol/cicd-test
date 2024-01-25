@@ -33,11 +33,11 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build_Push
       env:
-        APP: "cicd-test"
+        APP: "kbot"
         REGISTRY: "devdp"
-      run: make image push TARGETARCH=$TARGETARCH
+      run: make image push TARGETARCH=$TARGETARCH-$TARGETENV
     - name: Clean
-      run: make clean TARGETARCH=$TARGETARCH
+      run: make clean TARGETARCH=$TARGETARCH-$TARGETENV
 
     - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
