@@ -154,5 +154,5 @@ func init() {
 	// is called directly, e.g.:
 	// kbotCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	// ***test***version***
-	// ***add version***1.0***
+	// ***add version***1.1***
 }
