@@ -4,7 +4,7 @@ REGISTRY := devdp
 #VERSION=$(shell git describe --tags --abbrev=0)-otel
 VERSION=$(shell git describe --tags --abbrev=0)
 #TARGETOS linux darwin windows
-TARGETOS=linux
+TARGETOS=darwin
 #TARGETARCH amd64 arm64
 TARGETARCH=amd64
 #TARGETENV dev qa stage prod
