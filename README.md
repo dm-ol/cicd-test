@@ -1,3 +1,3 @@
 # Creating a telegram bot KBOT
 Test Docker and k3s
-1.0.0
+v1.0.1
