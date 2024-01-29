@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -28,10 +28,14 @@ jobs:
       run: make test
     - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-    - name: Deploy
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: self
-        BRANCH: qa
-        FOLDER: ./
+    - name: Setup git
+      run: |
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "GitHub Actions Bot"
+
+    - name: Merge branch
+      run: |
+        git checkout qa
+        git merge dev --no-edit  # replace source-branch and target-branch with your branch names
+        git push
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
