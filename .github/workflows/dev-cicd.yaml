@@ -36,6 +36,6 @@ jobs:
     - name: Merge branch
       run: |
         git checkout qa
-        git merge dev --no-edit  # replace source-branch and target-branch with your branch names
+        git merge dev --force  # replace source-branch and target-branch with your branch names
         git push
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
