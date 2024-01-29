@@ -35,7 +35,5 @@ jobs:
 
     - name: Merge branch
       run: |
-        git checkout qa
-        git merge dev --force  # replace source-branch and target-branch with your branch names
-        git push
+        git fetch origin dev:qa --force 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
