@@ -35,5 +35,4 @@ jobs:
 
     - name: Merge branch
       run: |
-        git fetch origin dev:qa --force 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        git fetch origin dev:qa --force
