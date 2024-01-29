@@ -41,13 +41,8 @@ jobs:
 
     - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-    - uses: GuillaumeFalourd/git-commit-push@v1.3
-      with:
-        email: github-actions@github.com
-        name: github-actions
-        commit_message: "Update version $VERSION"
-        # remote_repository: https://github.com/dm-ol/gke-flux
-        target_branch: main
-        files: .
-        access_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+    - uses: planetoftheweb/copy-to-branches@v1
+        env:
+          key: stage
+          branches: qa
+          files: .
