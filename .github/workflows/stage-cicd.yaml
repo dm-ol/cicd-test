@@ -42,7 +42,7 @@ jobs:
     - run: echo "VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - uses: planetoftheweb/copy-to-branches@v1
-        env:
-          key: stage
-          branches: qa
-          files: .
+      env:
+        key: stage
+        branches: qa
+        files: .
